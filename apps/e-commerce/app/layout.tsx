@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import '@/app/globals.css';
 import { Kumbh_Sans } from 'next/font/google';
+import Navigation from './ui/Navigation';
 const kumbh = Kumbh_Sans({
 	weight: ['400', '700'],
 	style: ['normal'],
@@ -20,7 +21,11 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={kumbh.className}>{children}</body>
+			<body className={kumbh.className}>
+				<Navigation />
+
+				{children}
+			</body>
 		</html>
 	);
 }
