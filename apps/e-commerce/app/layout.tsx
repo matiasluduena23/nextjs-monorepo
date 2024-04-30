@@ -23,7 +23,6 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={kumbh.className}>
 				<Navigation />
-
 				{children}
 			</body>
 		</html>

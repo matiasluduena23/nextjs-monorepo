@@ -41,19 +41,19 @@ export default function NavLinks() {
 				)}
 			>
 				<li>
-					<Link href={'#'}>Collections</Link>
+					<Link href={'/'}>Collections</Link>
 				</li>
 				<li>
-					<Link href={'#'}>Men</Link>
+					<Link href={'/men'}>Men</Link>
 				</li>
 				<li>
-					<Link href={'#'}>Woman</Link>
+					<Link href={'/woman'}>Woman</Link>
 				</li>
 				<li>
-					<Link href={'#'}>About</Link>
+					<Link href={'/about'}>About</Link>
 				</li>
 				<li>
-					<Link href={'#'}>Contact</Link>
+					<Link href={'/contact'}>Contact</Link>
 				</li>
 			</ul>
 		</div>
