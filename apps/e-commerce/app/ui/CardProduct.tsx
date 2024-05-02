@@ -8,11 +8,12 @@ import { formatImage, formatPrice } from '../lib/utils';
 
 export default function CardProduct({ producto }: { producto: Producto }) {
 	return (
-		<article className="p-6 rounded-2xl bg-white border border-clOrange max-w-[320px] mx-auto ">
+		<article className="p-4 rounded-2xl bg-white border border-clOrange max-w-[320px] mx-auto ">
 			<img
-				className="rounded-2xl shadow-md "
+				className="rounded-2xl shadow-md  min-h-[180px]"
 				src={formatImage(producto.images[0])}
 				alt="Picture of the product"
+				width="286px"
 			/>
 			<span className="block text-clOrange uppercase tracking-[2px] text-[12px] mt-4 font-bold ">
 				{producto.category.name}
@@ -35,7 +36,7 @@ export default function CardProduct({ producto }: { producto: Producto }) {
 			<div className="flex items-center justify-between gap-4">
 				<button className="bg-clOrange text-clLightgrayishblue flex items-center gap-2  py-2 w-[50%] rounded-md justify-center hover:opacity-70 ">
 					<Image
-						className="rounded-2xl text-clLightgrayishblue"
+						className="rounded-2xl text-clLightgrayishblue brightness-200"
 						src={cart}
 						alt="Picture of the product"
 						width={20}
