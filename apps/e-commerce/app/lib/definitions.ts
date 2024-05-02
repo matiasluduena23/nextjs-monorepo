@@ -3,10 +3,10 @@ export type Producto = {
 	title: string;
 	price: number;
 	description: string;
-	category: {
-		id: number;
-		name: string;
-		image: string;
+	category: string;
+	image: string;
+	rating: {
+		rate: number;
+		count: number;
 	};
-	images: [string, string, string];
 };

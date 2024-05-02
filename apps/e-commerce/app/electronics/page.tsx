@@ -1,10 +1,11 @@
-import { getCollections } from '../lib/data';
+import { getCategory } from '../lib/data';
 import { Producto } from '../lib/definitions';
 import CardProduct from '../ui/CardProduct';
+import { CATEGORIES } from '../lib/constants';
 
 export default async function page() {
-	const collections: Producto[] = await getCollections();
-	const electronics = collections.filter((item) => item.category.id === 2);
+	const data: Producto[] = await getCategory(CATEGORIES.electronic);
+
 	return (
 		<>
 			<div className="container mx-auto">
@@ -12,8 +13,8 @@ export default async function page() {
 					Electronics
 				</h1>
 				<main className="grid grid-cols-1 gap-8 my-[3rem] ">
-					{collections &&
-						electronics.map((item) => (
+					{data &&
+						data.map((item) => (
 							<CardProduct key={item.id} producto={item} />
 						))}
 				</main>

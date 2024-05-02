@@ -49,19 +49,16 @@ export default function NavLinks() {
 					</Link>
 				</li>
 				<li>
-					<Link
-						href={'/clothes'}
-						onClick={() => setShowMenu(!showMenu)}
-					>
-						Clothes
+					<Link href={'/men'} onClick={() => setShowMenu(!showMenu)}>
+						Men
 					</Link>
 				</li>
 				<li>
 					<Link
-						href={'/shoes'}
+						href={'/woman'}
 						onClick={() => setShowMenu(!showMenu)}
 					>
-						Shoes
+						Woman
 					</Link>
 				</li>
 				<li>

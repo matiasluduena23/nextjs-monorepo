@@ -4,7 +4,8 @@ const nextConfig = {
 		remotePatterns: [
 			{
 				protocol: 'https',
-				hostname: 'topperarg.vtexassets.com',
+				hostname: 'fakestoreapi.com',
+				pathname: '/img/**',
 			},
 		],
 	},
