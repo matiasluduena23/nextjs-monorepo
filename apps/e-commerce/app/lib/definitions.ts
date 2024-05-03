@@ -10,3 +10,10 @@ export type Producto = {
 		count: number;
 	};
 };
+
+export type CartItems = {
+	id?: number;
+	title?: string;
+	amount?: number;
+	price?: number;
+};
