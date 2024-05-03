@@ -5,11 +5,11 @@ import React from 'react';
 import Details from '@/app/ui/Details';
 
 export default async function page({ params }: { params: { id: string } }) {
-	const producto: Producto = await getProduct(params.id);
+	const product: Producto = await getProduct(params.id);
 
 	return (
 		<main>
-			<Details product={producto} />
+			<Details product={product} />
 		</main>
 	);
 }

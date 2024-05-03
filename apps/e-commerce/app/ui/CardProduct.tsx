@@ -8,7 +8,7 @@ import { ButtonCart } from './buttons';
 
 export default function CardProduct({ producto }: { producto: Producto }) {
 	return (
-		<article className="p-4 rounded-2xl bg-white border border-clOrange max-w-[320px] mx-auto ">
+		<article className="p-4 rounded-2xl bg-white border border-clOrange max-w-[320px] mx-auto relative -z-10">
 			<img
 				className="rounded-2xl shadow-md  min-h-[180px]"
 				src={producto.image}
@@ -34,7 +34,16 @@ export default function CardProduct({ producto }: { producto: Producto }) {
 			</div>
 
 			<div className="flex items-center justify-between gap-4">
-				<ButtonCart />
+				<ButtonCart>
+					<Image
+						className="rounded-2xl text-clLightgrayishblue brightness-200"
+						src={cart}
+						alt="Picture of the product"
+						width={20}
+						height={20}
+					/>
+					<span className="text-sm">Add to cart</span>
+				</ButtonCart>
 				<Link
 					href={`/details/${producto.id}/`}
 					className="border border-clOrange text-clOrange py-2 px-4 w-[50%] rounded-md text-center hover:bg-clOrange hover:text-clLightgrayishblue text-sm"
