@@ -12,8 +12,14 @@ export type Producto = {
 };
 
 export type CartItems = {
-	id?: number;
-	title?: string;
-	amount?: number;
-	price?: number;
+	id: number;
+	title: string;
+	amount: number;
+	price: number;
+	image: string;
+};
+
+export type CartContextProps = {
+	cartItems: CartItems[];
+	setCartItems: React.Dispatch<React.SetStateAction<CartItems[]>>;
 };

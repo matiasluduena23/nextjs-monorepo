@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { ButtonCart } from '@/app/ui/buttons';
 import ButtonCount from '@/app/ui/ButtonCount';
+import Button from './Button';
 import { Producto } from '../lib/definitions';
 
 export default function Details({ product }: { product: Producto }) {
@@ -40,7 +40,7 @@ export default function Details({ product }: { product: Producto }) {
 						</p>
 					</div>
 					<ButtonCount count={count} setCount={setCount} />
-					<ButtonCart />
+					<Button className="w-full py-3">Add to cart</Button>
 				</div>
 			</section>
 		</div>
