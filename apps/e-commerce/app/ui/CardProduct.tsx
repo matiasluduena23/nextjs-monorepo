@@ -30,19 +30,20 @@ export default function CardProduct({ producto }: { producto: Producto }) {
 	};
 
 	return (
-		<article className="p-4 rounded-2xl bg-white border border-clOrange max-w-[320px] mx-auto">
+		<article className="p-4 rounded-2xl bg-white border border-clOrange max-w-[320px] mx-auto max-h-[480px]">
 			{producto ? (
 				<>
 					<img
-						className="rounded-2xl shadow-md  min-h-[180px]"
+						className="rounded-2xl shadow-md  w-[230px] h-[280px] object-contain mx-auto"
 						src={image}
 						alt="Picture of the product"
-						width="286px"
 					/>
 					<span className="block text-clOrange uppercase tracking-[2px] text-[12px] mt-4 font-bold ">
 						{category}
 					</span>
-					<h2 className="text-xl font-semibold">{title}</h2>
+					<h2 className="text-xl font-semibold">
+						{title.slice(0, 23)}
+					</h2>
 					<div className="flex items-center justify-between font-bold">
 						<div className="flex items-center gap-2">
 							<p className="my-4  text-clDarkBlue text-2xl">
@@ -57,23 +58,23 @@ export default function CardProduct({ producto }: { producto: Producto }) {
 						</p>
 					</div>
 
-					<div className="flex items-center justify-between gap-4">
+					<div className="flex items-center justify-between gap-2">
 						<Button
-							className="flex px-3 h-full w-[50%]"
+							className="flex px-3 h-full w-[60%]"
 							onClick={handleClick}
 						>
 							<Image
 								className="rounded-2xl text-clLightgrayishblue brightness-200"
 								src={cart}
 								alt="Picture of the product"
-								width={20}
-								height={20}
+								width={15}
+								height={15}
 							/>
 							<span className="text-sm ">Add to cart</span>
 						</Button>
 						<Link
 							href={`/details/${id}/`}
-							className="border border-clOrange text-clOrange py-2 px-4 w-[50%] rounded-md text-center hover:bg-clOrange hover:text-clLightgrayishblue text-sm "
+							className="border border-clOrange text-clOrange py-2 px-4 w-[40%] rounded-md text-center hover:bg-clOrange hover:text-clLightgrayishblue text-sm "
 						>
 							Details
 						</Link>

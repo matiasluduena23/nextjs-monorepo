@@ -34,7 +34,7 @@ export default function NavLinks() {
 			</Link>
 			<ul
 				className={clsx(
-					' sm:flex gap-4 text-clDarkGreyblue',
+					' sm:flex  gap-4 lg:gap-12 lg:ml-8 text-clDarkGreyblue',
 					!showMenu
 						? 'hidden'
 						: ' absolute left-0 right-[45%] top-0 bottom-0 h-full z-10  flex flex-col gap-6 pt-20 pl-6 font-bold text-clDarkBlue text-xl  bg-clLightgrayishblue '
@@ -43,37 +43,28 @@ export default function NavLinks() {
 				<li>
 					<Link
 						href={'/electronics'}
-						onClick={() => setShowMenu(!showMenu)}
+						onClick={() => setShowMenu(false)}
 					>
 						Electronics
 					</Link>
 				</li>
 				<li>
-					<Link href={'/men'} onClick={() => setShowMenu(!showMenu)}>
+					<Link href={'/men'} onClick={() => setShowMenu(false)}>
 						Men
 					</Link>
 				</li>
 				<li>
-					<Link
-						href={'/woman'}
-						onClick={() => setShowMenu(!showMenu)}
-					>
+					<Link href={'/woman'} onClick={() => setShowMenu(false)}>
 						Woman
 					</Link>
 				</li>
 				<li>
-					<Link
-						href={'/about'}
-						onClick={() => setShowMenu(!showMenu)}
-					>
+					<Link href={'/about'} onClick={() => setShowMenu(false)}>
 						About
 					</Link>
 				</li>
 				<li>
-					<Link
-						href={'/contact'}
-						onClick={() => setShowMenu(!showMenu)}
-					>
+					<Link href={'/contact'} onClick={() => setShowMenu(false)}>
 						Contact
 					</Link>
 				</li>

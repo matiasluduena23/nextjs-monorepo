@@ -15,7 +15,7 @@ export default function ButtonCount({
 	};
 
 	return (
-		<div className="flex items-center justify-between px-4 bg-clLightgrayishblue rounded-md mb-4">
+		<div className="flex items-center justify-between px-4 bg-clLightgrayishblue rounded-md  sm:w-[40%]">
 			<button
 				className="inline-block h-[55px] w-[50px] "
 				onClick={handleMinusClick}

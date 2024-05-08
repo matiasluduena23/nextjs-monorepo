@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import Image from 'next/image';
 import shoe from '@/public/image-product-1-thumbnail.jpg';
 import trash from '@/public/icon-delete.svg';
@@ -9,10 +9,13 @@ import type { CartContextProps, CartItems } from '../lib/definitions';
 import Button from './Button';
 
 export default function Cart() {
-	let total = 0;
 	const { cartItems, setCartItems } = useContext(
 		CartContext
 	) as CartContextProps;
+	let total = useMemo(
+		() => cartItems.map((item) => item.price * item.amount),
+		[cartItems]
+	);
 
 	return (
 		<>
@@ -36,14 +39,13 @@ export default function Cart() {
 								<div className="flex flex-col text-clDarkGreyblue">
 									<p>{item.title}</p>
 									<p>
-										${item.price} x {item.amount}
+										${item.price} x {item.amount} :
 										<span className="text-clDarkBlue font-bold">
 											{' '}
 											$
-											{
-												(total +=
-													item.price * item.amount)
-											}
+											{(item.price * item.amount).toFixed(
+												2
+											)}
 										</span>
 									</p>
 								</div>
@@ -66,12 +68,18 @@ export default function Cart() {
 							</div>
 						))
 					) : (
-						<p>Your cart is empty</p>
+						<p className="text-center text-clDarkGreyblue">
+							Your cart is empty
+						</p>
 					)}
-					{total !== 0 && (
-						<div className="flex">
-							<p>total:</p>
-							<p>{total}</p>
+					{total.length > 0 && (
+						<div className="flex gap-2 text-clDarkBlue font-semibold opacity-80">
+							<p>Total: </p>
+							<p>
+								{total
+									.reduce((acc, pre) => acc + pre)
+									.toFixed(2)}
+							</p>
 						</div>
 					)}
 

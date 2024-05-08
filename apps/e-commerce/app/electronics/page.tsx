@@ -12,12 +12,12 @@ export default async function page() {
 				<h1 className="text-center text-2xl text-clDarkGreyblue font-bold mt-8">
 					Electronics
 				</h1>
-				<main className="grid grid-cols-1 gap-8 my-[3rem] ">
+				<div className="grid grid-cols-[repeat(auto-fit,minmax(300px,11fr))] justify-center gap-x-2 gap-y-4">
 					{data &&
 						data.map((item) => (
 							<CardProduct key={item.id} producto={item} />
 						))}
-				</main>
+				</div>
 			</div>
 		</>
 	);

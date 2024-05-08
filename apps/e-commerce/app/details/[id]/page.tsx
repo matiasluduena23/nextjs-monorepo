@@ -8,7 +8,7 @@ export default async function page({ params }: { params: { id: string } }) {
 	const product: Producto = await getProduct(params.id);
 
 	return (
-		<main>
+		<main className="container mx-auto">
 			<Details product={product} />
 		</main>
 	);
