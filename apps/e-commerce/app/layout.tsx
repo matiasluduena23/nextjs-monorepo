@@ -24,8 +24,10 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={kumbh.className}>
 				<Provider>
-					<Navigation />
-					<div className="">{children}</div>
+					<div className="container mx-auto max-w-[1200px] ">
+						<Navigation />
+						<div className="">{children}</div>
+					</div>
 				</Provider>
 			</body>
 		</html>
