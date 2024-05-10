@@ -1,31 +1,41 @@
 'use client';
-//images
-import smallImage1 from '@/public/image-product-1-thumbnail.jpg';
-import smallImage2 from '@/public/image-product-2-thumbnail.jpg';
-import smallImage3 from '@/public/image-product-3-thumbnail.jpg';
-import image1 from '@/public/image-product-1.jpg';
-import image2 from '@/public/image-product-2.jpg';
-import image3 from '@/public/image-product-3.jpg';
 
 import React, { useContext, useState } from 'react';
 import Image, { StaticImageData } from 'next/image';
 import ButtonCount from '@/app/ui/ButtonCount';
 import Button from './Button';
-import { CartContextProps, Producto } from '../lib/definitions';
+import { CartContextProps, Images, Producto } from '../lib/definitions';
 import { CartContext } from '../lib/provider/context';
 import DialogImage from './DialogImage';
 
 export default function Details({ product }: { product: Producto }) {
 	const { image, title, category, description, price, id } = product;
 	const [count, setCount] = useState(0);
-	const [openDialogImage, setOpenDialogImage] = useState(false);
 
-	const [updateImage, setUpdateImage] = useState<string | StaticImageData>(
-		image
-	);
 	const { cartItems, setCartItems } = useContext(
 		CartContext
 	) as CartContextProps;
+
+	const arrImages = [
+		{
+			id: 1,
+			image: image,
+		},
+		{
+			id: 2,
+			image: image,
+		},
+		{
+			id: 3,
+			image: image,
+		},
+		{
+			id: 4,
+			image: image,
+		},
+	];
+
+	const [imageId, setImageId] = useState(1);
 
 	const handleClick = () => {
 		if (count === 0) return;
@@ -49,59 +59,26 @@ export default function Details({ product }: { product: Producto }) {
 		<>
 			<section className="mx-auto sm:flex sm:items-center justify-center sm:mt-32 gap-16">
 				<div className="flex flex-col   w-[50%] ml-20 gap-12 ">
-					<button
-						onClick={() => setOpenDialogImage(!openDialogImage)}
-					>
-						<Image
-							className="mx-auto border border-clOrange rounded-lg p-4"
-							src={updateImage}
-							alt={title}
-							height={300}
-							width={200}
-						/>
-						<DialogImage
-							openDialogImage={openDialogImage}
-							setOpenDialogImage={setOpenDialogImage}
-						/>
-					</button>
+					<DialogImage imageId={imageId} images={arrImages} />
 
 					<div className="flex justify-center gap-12 rounded-lg h-[60px] ">
-						<button onClick={() => setUpdateImage(image)}>
-							<Image
-								className="border border-clOrange rounded-lg p-2 object-cover"
-								src={image}
-								alt={title}
-								height={40}
-								width={60}
-							/>
-						</button>
-						<button onClick={() => setUpdateImage(image1)}>
-							<Image
-								className="border border-clOrange rounded-lg p-2 object-contain"
-								src={smallImage1}
-								alt={title}
-								height={60}
-								width={60}
-							/>
-						</button>
-						<button onClick={() => setUpdateImage(image2)}>
-							<Image
-								className="border border-clOrange rounded-lg p-2 object-contain"
-								src={smallImage2}
-								alt={title}
-								height={60}
-								width={60}
-							/>
-						</button>
-						<button onClick={() => setUpdateImage(image3)}>
-							<Image
-								className="border border-clOrange rounded-lg p-2 object-contain"
-								src={smallImage3}
-								alt={title}
-								height={60}
-								width={60}
-							/>
-						</button>
+						{arrImages.length > 0 &&
+							arrImages.map((item) => (
+								<button
+									key={item.id}
+									onClick={() =>
+										setImageId((prev) => (prev = item.id))
+									}
+								>
+									<Image
+										className="border border-clOrange rounded-lg p-2 object-contain"
+										src={item.image}
+										alt={title}
+										height={60}
+										width={60}
+									/>
+								</button>
+							))}
 					</div>
 				</div>
 

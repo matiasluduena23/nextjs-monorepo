@@ -1,3 +1,5 @@
+import { StaticImageData } from 'next/image';
+
 export type Producto = {
 	id: number;
 	title: string;
@@ -22,4 +24,10 @@ export type CartItems = {
 export type CartContextProps = {
 	cartItems: CartItems[];
 	setCartItems: React.Dispatch<React.SetStateAction<CartItems[]>>;
+};
+
+export type Images = {
+	id: number;
+	src: string | StaticImageData;
+	thumb: string | StaticImageData;
 };

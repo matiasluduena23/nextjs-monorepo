@@ -1,5 +1,5 @@
-import React, { cloneElement } from 'react';
-import { getCategory, getCollections } from '../lib/data';
+import React from 'react';
+import { getCategory } from '../lib/data';
 import { Producto } from '../lib/definitions';
 import CardProduct from '../ui/CardProduct';
 import { CATEGORIES } from '../lib/constants';

@@ -33,31 +33,32 @@ export default function CardProduct({ producto }: { producto: Producto }) {
 		<article className="p-4 rounded-2xl bg-white border border-clOrange max-w-[320px] mx-auto max-h-[480px]">
 			{producto ? (
 				<>
-					<img
-						className="rounded-2xl shadow-md  w-[230px] h-[280px] object-contain mx-auto"
-						src={image}
-						alt="Picture of the product"
-					/>
-					<span className="block text-clOrange uppercase tracking-[2px] text-[12px] mt-4 font-bold ">
-						{category}
-					</span>
-					<h2 className="text-xl font-semibold">
-						{title.slice(0, 23)}
-					</h2>
-					<div className="flex items-center justify-between font-bold">
-						<div className="flex items-center gap-2">
-							<p className="my-4  text-clDarkBlue text-2xl">
-								$ {(price / 2).toFixed(2)}
+					<Link href={`/details/${id}/`}>
+						<img
+							className="rounded-2xl shadow-md  w-[230px] h-[280px] object-contain mx-auto"
+							src={image}
+							alt="Picture of the product"
+						/>
+						<span className="block text-clOrange uppercase tracking-[2px] text-[12px] mt-4 font-bold ">
+							{category}
+						</span>
+						<h2 className="text-xl font-semibold">
+							{title.slice(0, 23)}
+						</h2>
+						<div className="flex items-center justify-between font-bold">
+							<div className="flex items-center gap-2">
+								<p className="my-4  text-clDarkBlue text-2xl">
+									$ {(price / 2).toFixed(2)}
+								</p>
+								<span className="text-clOrange bg-orange-100 px-2 rounded-md text-sm">
+									50%
+								</span>
+							</div>
+							<p className="text-clGrayishblue line-through">
+								${price}
 							</p>
-							<span className="text-clOrange bg-orange-100 px-2 rounded-md text-sm">
-								50%
-							</span>
 						</div>
-						<p className="text-clGrayishblue line-through">
-							${price}
-						</p>
-					</div>
-
+					</Link>
 					<div className="flex items-center justify-between gap-2">
 						<Button
 							className="flex px-3 h-full w-[60%]"
