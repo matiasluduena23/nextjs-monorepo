@@ -2,7 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Image from 'next/image';
 import React, { useContext } from 'react';
-import { CartContextProps, CartItems, Producto } from '../lib/definitions';
+import { CartContextProps, Producto } from '../lib/definitions';
 import cart from '@/public/icon-cart.svg';
 import Link from 'next/link';
 import Button from './Button';

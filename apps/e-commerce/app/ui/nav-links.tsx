@@ -28,7 +28,10 @@ export default function NavLinks() {
 					/>
 				)}
 			</button>
-			<Link href="/" className="text-4xl font-semibold mb-2 -z-1">
+			<Link
+				href="/"
+				className=" text-2xl md:text-4xl font-semibold mb-2 -z-1"
+			>
 				{' '}
 				sneakers
 			</Link>

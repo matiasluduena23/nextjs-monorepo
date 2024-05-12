@@ -9,10 +9,8 @@ export default async function page() {
 
 	return (
 		<div className="container mx-auto  relative -z-10">
-			<h1 className="text-center text-2xl text-clDarkGreyblue font-bold mt-8">
-				Men
-			</h1>
-			<div className="grid grid-cols-[repeat(auto-fit,minmax(300px,11fr))] justify-center gap-x-2 gap-y-4">
+			<h1 className="  mt-8 text-center text-3xl ">Men</h1>
+			<div className="grid grid-cols-[repeat(auto-fit,minmax(300px,11fr))] justify-center gap-x-2 gap-y-4 mt-12">
 				{data &&
 					data.map((item) => (
 						<CardProduct key={item.id} producto={item} />

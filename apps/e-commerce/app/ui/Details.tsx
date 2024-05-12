@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useContext, useState } from 'react';
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 import ButtonCount from '@/app/ui/ButtonCount';
 import Button from './Button';
-import { CartContextProps, Images, Producto } from '../lib/definitions';
+import { CartContextProps, Producto } from '../lib/definitions';
 import { CartContext } from '../lib/provider/context';
 import DialogImage from './DialogImage';
 
@@ -57,11 +57,11 @@ export default function Details({ product }: { product: Producto }) {
 
 	return (
 		<>
-			<section className="mx-auto sm:flex sm:items-center justify-center sm:mt-32 gap-16">
-				<div className="flex flex-col   w-[50%] ml-20 gap-12 ">
+			<section className="mx-auto sm:flex sm:items-center justify-center sm:mt-16 gap-16">
+				<div className="flex flex-col mx-auto  md:w-[50%] md:ml-20 gap-12 ">
 					<DialogImage imageId={imageId} images={arrImages} />
 
-					<div className="flex justify-center gap-12 rounded-lg h-[60px] ">
+					<div className="flex justify-center gap-4 md:gap-12 rounded-lg h-[60px] ">
 						{arrImages.length > 0 &&
 							arrImages.map((item) => (
 								<button
@@ -82,8 +82,8 @@ export default function Details({ product }: { product: Producto }) {
 					</div>
 				</div>
 
-				<div className="w-[50%]">
-					<div className="p-8 sm:max-w-[500px] ">
+				<div className="md:w-[50%]">
+					<div className="p-8 w-full md:max-w-[500px] ">
 						<span className="block text-clOrange uppercase tracking-[2px] text-[12px] my-4 font-bold ">
 							{category}
 						</span>

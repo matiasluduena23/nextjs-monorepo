@@ -9,7 +9,7 @@ export default async function page() {
 		<>
 			<div className="container mx-auto ">
 				<h1 className="text-center text-2xl text-clDarkGreyblue font-bold mt-8 "></h1>
-				<div className="grid grid-cols-[repeat(auto-fit,minmax(300px,11fr))] justify-center gap-x-2 gap-y-4">
+				<div className="grid grid-cols-[repeat(auto-fit,minmax(300px,11fr))] justify-center gap-x-2 gap-y-4 mt-12">
 					{products &&
 						products.map((item) => (
 							<CardProduct key={item.id} producto={item} />

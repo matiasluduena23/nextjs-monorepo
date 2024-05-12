@@ -8,13 +8,16 @@ import NavLinks from './nav-links';
 import Cart from './Cart';
 import { CartContext } from '../lib/provider/context';
 import { CartContextProps } from '../lib/definitions';
+import { useOutsideClick } from '../lib/hooks';
 
 export default function Navigation() {
 	const [showcart, setShowcart] = useState(false);
 	const { cartItems } = useContext(CartContext) as CartContextProps;
 
+	const ref = useOutsideClick(() => setShowcart(!showcart));
+
 	return (
-		<div className="container mx-auto ">
+		<div className="md:container mx-auto ">
 			<nav className="flex  justify-between p-4 ">
 				<NavLinks />
 				<div className="flex items-center gap-4 relative">
@@ -34,7 +37,11 @@ export default function Navigation() {
 							height={25}
 						/>
 					</button>
-					{showcart && <Cart />}
+					{showcart && (
+						<div ref={ref}>
+							<Cart />{' '}
+						</div>
+					)}
 					{cartItems.length > 0 && (
 						<span className="rounded-full bg-clOrange px-2 text-[10px] text-clPaleOrange font-bold absolute right-[35px] top-2">
 							{cartItems.length}
