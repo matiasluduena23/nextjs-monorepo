@@ -32,7 +32,11 @@ export function useComment() {
 }
 
 export function useCommentDispatch() {
-	return useContext(CommentDispatchContext);
+	const context = useContext(CommentDispatchContext);
+	if (!context) {
+		throw new Error('Context not exist');
+	}
+	return context;
 }
 
 type CommentReducer =
