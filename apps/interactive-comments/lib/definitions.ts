@@ -1,7 +1,7 @@
 export type UserComment = {
 	currentUser: {
 		image: {
-			kpng: string;
+			png: string;
 			webp: string;
 		};
 		username: string;
@@ -16,7 +16,7 @@ export type Comment = {
 	score: number;
 	user: {
 		image: {
-			kpng: string;
+			png: string;
 			webp: string;
 		};
 		username: string;
@@ -32,9 +32,13 @@ export type Reply = {
 	replyingTo: string;
 	user: {
 		image: {
-			kpng: string;
+			png: string;
 			webp: string;
 		};
 		username: string;
 	};
+};
+
+export type CommentProviderProps = {
+	children: React.ReactNode;
 };

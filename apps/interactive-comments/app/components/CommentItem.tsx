@@ -3,25 +3,16 @@ import Image from 'next/image';
 import arrowIcon from '@/public/icon-reply.svg';
 import minusIcon from '@/public/icon-minus.svg';
 import plusIcon from '@/public/icon-plus.svg';
+import { Comment } from '@/lib/definitions';
 
-export default function Comment() {
-	const id = 1;
-	const content = 'coment body';
-	const createdAt = '1 may';
-	const score = 4;
-	const user = {
-		image: {
-			kpng: '/avatars/image-maxblagun.png',
-			webp: 'url',
-		},
-		username: 'matias luduena',
-	};
-	const replies = [];
+export default function CommentItem({ comment }: { comment: Comment }) {
+	const { id, content, createdAt, score, user, replies } = comment;
+
 	return (
 		<article className="bg-white p-4 flex flex-col gap-4 rounded-md">
 			<div className="flex items-center gap-4">
 				<Image
-					src={user.image.kpng}
+					src={user.image.png}
 					alt="icon profile"
 					width={25}
 					height={25}
