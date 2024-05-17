@@ -41,7 +41,8 @@ export function useCommentDispatch() {
 
 type CommentReducer =
 	| { type: 'addComment'; payload: Comment }
-	| { type: 'updateComment'; payload: { id: number } };
+	| { type: 'plusComment'; payload: { id: number } }
+	| { type: 'minusComment'; payload: { id: number } };
 
 function commentReducer(
 	state: UserComment,
@@ -54,7 +55,33 @@ function commentReducer(
 				comments: [...state.comments, action.payload],
 			};
 		}
-		case 'updateComment': {
+		case 'plusComment': {
+			return {
+				...state,
+				comments: [
+					...state.comments.map((item) => {
+						if (item.id === action.payload.id) {
+							return { ...item, score: item.score + 1 };
+						} else {
+							return item;
+						}
+					}),
+				],
+			};
+		}
+		case 'minusComment': {
+			return {
+				...state,
+				comments: [
+					...state.comments.map((item) => {
+						if (item.id === action.payload.id) {
+							return { ...item, score: item.score - 1 };
+						} else {
+							return item;
+						}
+					}),
+				],
+			};
 		}
 
 		default: {

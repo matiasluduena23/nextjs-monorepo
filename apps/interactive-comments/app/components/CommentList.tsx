@@ -6,6 +6,7 @@ import CommentItem from './CommentItem';
 
 export default function CommentList() {
 	const { comments } = useComment();
+	console.log(comments);
 	return (
 		<>
 			<div className="flex flex-col gap-4">

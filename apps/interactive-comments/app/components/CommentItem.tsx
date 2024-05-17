@@ -1,12 +1,29 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Image from 'next/image';
 import arrowIcon from '@/public/icon-reply.svg';
 import minusIcon from '@/public/icon-minus.svg';
 import plusIcon from '@/public/icon-plus.svg';
 import { Comment } from '@/lib/definitions';
+import { useCommentDispatch } from '@/lib/CommentContext';
 
 export default function CommentItem({ comment }: { comment: Comment }) {
 	const { id, content, createdAt, score, user, replies } = comment;
+	const dispatch = useCommentDispatch();
+	const [like, setLike] = useState(1);
+
+	const handleClickPlus = () => {
+		if (like === 2) return;
+		dispatch({ type: 'plusComment', payload: { id } });
+		setLike(like + 1);
+	};
+
+	const handleClickMinus = () => {
+		if (like === 0) return;
+		dispatch({ type: 'minusComment', payload: { id } });
+		setLike(like - 1);
+	};
 
 	return (
 		<article className="bg-white p-4 flex flex-col gap-4 rounded-md">
@@ -23,7 +40,7 @@ export default function CommentItem({ comment }: { comment: Comment }) {
 			<p className="text-clGrayBlue">{content}</p>
 			<div className="flex justify-between">
 				<div className="flex items-center  bg-clLightgray rounded-md ">
-					<button className="py-2 px-3 ">
+					<button className="py-2 px-3 " onClick={handleClickPlus}>
 						<Image
 							src={plusIcon}
 							alt="icon profile"
@@ -32,7 +49,7 @@ export default function CommentItem({ comment }: { comment: Comment }) {
 						/>
 					</button>
 					<p className="text-clModerateblue font-bold">{score}</p>
-					<button className="py-2 px-3 ">
+					<button className="py-2 px-3 " onClick={handleClickMinus}>
 						<Image
 							src={minusIcon}
 							alt="icon profile"

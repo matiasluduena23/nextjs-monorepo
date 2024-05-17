@@ -13,6 +13,7 @@ export default function AddComment() {
 	const [commentText, setCommentText] = useState('');
 
 	const handleClick = () => {
+		if (!commentText) return;
 		const newComment: Comment = {
 			id: 5,
 			content: commentText,
@@ -21,6 +22,7 @@ export default function AddComment() {
 			user: { image: currentUser.image, username: currentUser.username },
 			replies: [],
 		};
+
 		dispatch({ type: 'addComment', payload: newComment });
 		setCommentText((prev) => (prev = ''));
 	};
