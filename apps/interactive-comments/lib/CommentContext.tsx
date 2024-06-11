@@ -42,7 +42,8 @@ export function useCommentDispatch() {
 type CommentReducer =
 	| { type: 'addComment'; payload: Comment }
 	| { type: 'plusComment'; payload: { id: number } }
-	| { type: 'minusComment'; payload: { id: number } };
+	| { type: 'minusComment'; payload: { id: number } }
+	| { type: 'deleteComment'; payload: { id: number } };
 
 function commentReducer(
 	state: UserComment,
@@ -80,6 +81,16 @@ function commentReducer(
 							return item;
 						}
 					}),
+				],
+			};
+		}
+		case 'deleteComment': {
+			return {
+				...state,
+				comments: [
+					...state.comments.filter(
+						(comment) => comment.id !== action.payload.id
+					),
 				],
 			};
 		}
