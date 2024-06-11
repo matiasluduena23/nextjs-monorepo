@@ -11,7 +11,7 @@ export default function CommentList() {
 		<>
 			<div className="flex flex-col gap-4">
 				{comments.map((comment) => (
-					<div key={comment.id}>
+					<div key={comment.id} className="">
 						<CommentItem comment={comment} />
 					</div>
 				))}

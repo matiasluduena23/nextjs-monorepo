@@ -43,7 +43,7 @@ export default function DeleteDialog({
 			<DialogTrigger asChild>
 				<button
 					className="flex items-center text-clModerateblue font-semibold gap-1
-                 text-sm"
+                 text-sm hover:opacity-70"
 				>
 					<Image
 						src={deleteIcon}

@@ -23,9 +23,9 @@ export default function CommentItem({ comment }: { comment: Comment }) {
 	const [commentText, setCommentText] = useState(content);
 
 	return (
-		<section>
-			<article className="bg-white p-4 flex flex-col gap-4 rounded-md">
-				<div className="flex items-center gap-3">
+		<section className="max-w-[600px] mx-auto">
+			<article className="bg-white p-4 flex flex-col  rounded-md sm:relative sm:pl-[4rem] sm:min-h-[115px]">
+				<div className="flex items-center gap-3 sm:mb-2">
 					<Image
 						src={user.image.png}
 						alt="icon profile"
@@ -41,7 +41,7 @@ export default function CommentItem({ comment }: { comment: Comment }) {
 					<p className="text-clGrayBlue">{createdAt}</p>
 				</div>
 				{activeEdit ? (
-					<div>
+					<div className="flex flex-col items-end">
 						<Textarea
 							placeholder="Add a comment..."
 							className="border w-full min-h-[80px] "
@@ -49,7 +49,7 @@ export default function CommentItem({ comment }: { comment: Comment }) {
 							onChange={(e) => setCommentText(e.target.value)}
 						/>
 						<Button
-							className="bg-clModerateblue text-white px-6 uppercase mt-2"
+							className="bg-clModerateblue text-white px-6 uppercase mt-2 hover:opacity-70 w-fit"
 							onClick={() => {
 								dispatch({
 									type: 'editComment',
@@ -62,17 +62,17 @@ export default function CommentItem({ comment }: { comment: Comment }) {
 						</Button>
 					</div>
 				) : (
-					<p className="text-clGrayBlue">{content}</p>
+					<p className="text-clGrayBlue my-4 sm:my-0">{content}</p>
 				)}
 
 				<div className="flex justify-between">
 					<CommentLikesButtons id={id} score={score} />
 					{user.username === currentUser.username ? (
-						<div className="flex items-center gap-3">
+						<div className="flex items-center gap-3 sm:absolute top-4 right-4">
 							<DeleteDialog id={id} />
 							<button
 								className="flex items-center text-clModerateblue font-semibold gap-1
-                 text-sm"
+                 text-sm hover:opacity-70 "
 								onClick={() => setActiveEdit(!activeEdit)}
 							>
 								<Image
@@ -87,7 +87,7 @@ export default function CommentItem({ comment }: { comment: Comment }) {
 					) : (
 						<button
 							className="flex items-center text-clModerateblue font-semibold gap-1
-                 text-sm"
+                 text-sm hover:opacity-70 sm:absolute top-4 right-4"
 							onClick={() => setActiveReply(!activeReply)}
 						>
 							<Image
@@ -109,7 +109,9 @@ export default function CommentItem({ comment }: { comment: Comment }) {
 				/>
 			)}
 
-			{replies && <RepliesList replies={replies} idComment={id} />}
+			{replies.length > 0 && (
+				<RepliesList replies={replies} idComment={id} />
+			)}
 		</section>
 	);
 }

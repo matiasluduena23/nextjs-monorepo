@@ -24,8 +24,8 @@ export default function ReplyItem({
 	const [commentText, setCommentText] = useState(content);
 
 	return (
-		<article className="bg-gray-400  p-4 flex flex-col gap-4 rounded-md">
-			<div className="flex items-center gap-4">
+		<article className="bg-white  p-4 flex flex-col  rounded-md sm:relative sm:pl-[4rem] sm:min-h-[115px]">
+			<div className="flex items-center gap-4 sm:mb-2">
 				<Image
 					src={user.image.png}
 					alt="icon profile"
@@ -37,7 +37,7 @@ export default function ReplyItem({
 			</div>
 
 			{activeEdit ? (
-				<div>
+				<div className="flex flex-col items-end">
 					<Textarea
 						placeholder="Add a comment..."
 						className="border w-full min-h-[80px] "
@@ -45,7 +45,7 @@ export default function ReplyItem({
 						onChange={(e) => setCommentText(e.target.value)}
 					/>
 					<Button
-						className="bg-clModerateblue text-white px-6 uppercase mt-2"
+						className="bg-clModerateblue text-white px-6 uppercase mt-2 hover:opacity-70 w-fit"
 						onClick={() => {
 							dispatch({
 								type: 'editReply',
@@ -62,7 +62,7 @@ export default function ReplyItem({
 					</Button>
 				</div>
 			) : (
-				<p className="text-clGrayBlue">{content}</p>
+				<p className="text-clGrayBlue my-4 sm:my-0">{content}</p>
 			)}
 
 			<div className="flex justify-between">
@@ -72,11 +72,11 @@ export default function ReplyItem({
 					score={score}
 				/>
 				{user.username === currentUser.username ? (
-					<div className="flex items-center gap-3">
+					<div className="flex items-center gap-3 sm:absolute top-4 right-4">
 						<DeleteDialog id={idComment} idReply={id} />
 						<button
 							className="flex items-center text-clModerateblue font-semibold gap-1
-                 text-sm"
+                 text-sm hover:opacity-70"
 							onClick={() => setActiveEdit(!activeEdit)}
 						>
 							<Image
@@ -91,7 +91,7 @@ export default function ReplyItem({
 				) : (
 					<button
 						className="flex items-center text-clModerateblue font-semibold gap-1
-                 text-sm"
+                 text-sm hover:opacity-70 sm:absolute top-4 right-4"
 					>
 						<Image
 							src={arrowIcon}

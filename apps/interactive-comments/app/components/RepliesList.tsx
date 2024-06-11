@@ -11,9 +11,9 @@ export default function RepliesList({
 	idComment: number;
 }) {
 	return (
-		<section className="flex flex-col gap-4 my-4 ml-4">
+		<section className="flex flex-col gap-4   mt-4 border-l border-clLightgray">
 			{replies.map((item) => (
-				<div key={item.id}>
+				<div key={item.id} className="ml-4">
 					<ReplyItem reply={item} idComment={idComment} />
 				</div>
 			))}

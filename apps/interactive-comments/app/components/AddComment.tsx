@@ -43,7 +43,7 @@ export default function AddComment() {
 					height={25}
 				/>
 				<Button
-					className="bg-clModerateblue text-white px-6 uppercase"
+					className="bg-clModerateblue text-white px-6 uppercase hover:bg-clModerateblue hover:opacity-70"
 					onClick={handleClick}
 				>
 					send
