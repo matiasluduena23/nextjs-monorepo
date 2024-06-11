@@ -33,8 +33,8 @@ export default function DeleteDialog({ id }: { id: number }) {
 					<span className="text-clSoftRed">Delete</span>
 				</button>
 			</DialogTrigger>
-			<DialogContent className="w-[340px]">
-				<DialogHeader>
+			<DialogContent className="w-[340px] rounded-md">
+				<DialogHeader className=" text-start">
 					<DialogTitle>Delete comment</DialogTitle>
 					<DialogDescription>
 						Are you sure you want to delete this comment? this will
@@ -42,9 +42,9 @@ export default function DeleteDialog({ id }: { id: number }) {
 					</DialogDescription>
 				</DialogHeader>
 
-				<DialogFooter className="flex items-center">
+				<DialogFooter className="flex flex-row gap-4 items-center">
 					<Button
-						className="uppercase w-[50%]"
+						className="uppercase bg-clGrayBlue w-[50%]"
 						onClick={() => setOpen(false)}
 					>
 						No, cancel

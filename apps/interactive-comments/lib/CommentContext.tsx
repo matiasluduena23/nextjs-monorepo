@@ -43,7 +43,8 @@ type CommentReducer =
 	| { type: 'addComment'; payload: Comment }
 	| { type: 'plusComment'; payload: { id: number } }
 	| { type: 'minusComment'; payload: { id: number } }
-	| { type: 'deleteComment'; payload: { id: number } };
+	| { type: 'deleteComment'; payload: { id: number } }
+	| { type: 'editComment'; payload: { id: number; comment: string } };
 
 function commentReducer(
 	state: UserComment,
@@ -91,6 +92,20 @@ function commentReducer(
 					...state.comments.filter(
 						(comment) => comment.id !== action.payload.id
 					),
+				],
+			};
+		}
+		case 'editComment': {
+			return {
+				...state,
+				comments: [
+					...state.comments.map((item) => {
+						if (item.id === action.payload.id) {
+							return { ...item, content: action.payload.comment };
+						} else {
+							return item;
+						}
+					}),
 				],
 			};
 		}
