@@ -2,7 +2,12 @@
 
 import { Dispatch, createContext, useContext, useReducer } from 'react';
 import data from '@/data/data.json';
-import { CommentProviderProps, UserComment, Comment } from './definitions';
+import {
+	CommentProviderProps,
+	UserComment,
+	Comment,
+	Reply,
+} from './definitions';
 
 const CommentContext = createContext<null | UserComment>(null);
 const CommentDispatchContext = createContext<null | Dispatch<CommentReducer>>(
@@ -41,10 +46,13 @@ export function useCommentDispatch() {
 
 type CommentReducer =
 	| { type: 'addComment'; payload: Comment }
-	| { type: 'plusComment'; payload: { id: number } }
-	| { type: 'minusComment'; payload: { id: number } }
+	| { type: 'likeComment'; payload: { id: number } }
+	| { type: 'unlikeComment'; payload: { id: number } }
 	| { type: 'deleteComment'; payload: { id: number } }
-	| { type: 'editComment'; payload: { id: number; comment: string } };
+	| { type: 'editComment'; payload: { id: number; comment: string } }
+	| { type: 'addReply'; payload: { idComment: number; reply: Reply } }
+	| { type: 'likeReply'; payload: { idComment: number; idReply: number } }
+	| { type: 'unlikeReply'; payload: { idComment: number; idReply: number } };
 
 function commentReducer(
 	state: UserComment,
@@ -57,7 +65,7 @@ function commentReducer(
 				comments: [...state.comments, action.payload],
 			};
 		}
-		case 'plusComment': {
+		case 'likeComment': {
 			return {
 				...state,
 				comments: [
@@ -71,7 +79,7 @@ function commentReducer(
 				],
 			};
 		}
-		case 'minusComment': {
+		case 'unlikeComment': {
 			return {
 				...state,
 				comments: [
@@ -102,6 +110,86 @@ function commentReducer(
 					...state.comments.map((item) => {
 						if (item.id === action.payload.id) {
 							return { ...item, content: action.payload.comment };
+						} else {
+							return item;
+						}
+					}),
+				],
+			};
+		}
+		case 'addReply': {
+			return {
+				...state,
+				comments: [
+					...state.comments.map((item) => {
+						if (item.id === action.payload.idComment) {
+							return {
+								...item,
+								replies: [
+									...item.replies,
+									action.payload.reply,
+								],
+							};
+						} else {
+							return item;
+						}
+					}),
+				],
+			};
+		}
+		case 'likeReply': {
+			return {
+				...state,
+				comments: [
+					...state.comments.map((item) => {
+						if (item.id === action.payload.idComment) {
+							return {
+								...item,
+								replies: [
+									...item.replies.map((reply) => {
+										if (
+											reply.id === action.payload.idReply
+										) {
+											return {
+												...reply,
+												score: reply.score + 1,
+											};
+										} else {
+											return reply;
+										}
+									}),
+								],
+							};
+						} else {
+							return item;
+						}
+					}),
+				],
+			};
+		}
+		case 'unlikeReply': {
+			return {
+				...state,
+				comments: [
+					...state.comments.map((item) => {
+						if (item.id === action.payload.idComment) {
+							return {
+								...item,
+								replies: [
+									...item.replies.map((reply) => {
+										if (
+											reply.id === action.payload.idReply
+										) {
+											return {
+												...reply,
+												score: reply.score - 1,
+											};
+										} else {
+											return reply;
+										}
+									}),
+								],
+							};
 						} else {
 							return item;
 						}

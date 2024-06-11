@@ -8,93 +8,108 @@ import editIcon from '@/public/icon-edit.svg';
 import { Comment } from '@/lib/definitions';
 import { useCommentDispatch, useComment } from '@/lib/CommentContext';
 import DeleteDialog from '@/app/components/DeleteDialog';
-import LikesButtons from './LikesButtons';
+import CommentLikesButtons from './CommentLikesButtons';
 import { Textarea } from '../../../e-commerce/components/ui/textarea';
 import { Button } from '../../../e-commerce/components/ui/button';
+import RepliesList from './RepliesList';
+import AddReply from './AddReply';
 
 export default function CommentItem({ comment }: { comment: Comment }) {
 	const [activeEdit, setActiveEdit] = useState(false);
+	const [activeReply, setActiveReply] = useState(false);
 	const { id, content, createdAt, score, user, replies } = comment;
 	const dispatch = useCommentDispatch();
 	const { currentUser } = useComment();
 	const [commentText, setCommentText] = useState(content);
 
 	return (
-		<article className="bg-white p-4 flex flex-col gap-4 rounded-md">
-			<div className="flex items-center gap-3">
-				<Image
-					src={user.image.png}
-					alt="icon profile"
-					width={25}
-					height={25}
-				/>
-				<p className="text-clDarkblue font-bold">{user.username}</p>
-				{user.username === currentUser.username && (
-					<span className="bg-clModerateblue text-clLightgray font-semibold px-1">
-						you
-					</span>
-				)}
-				<p className="text-clGrayBlue">{createdAt}</p>
-			</div>
-			{activeEdit ? (
-				<div>
-					<Textarea
-						placeholder="Add a comment..."
-						className="border w-full min-h-[80px] "
-						value={commentText}
-						onChange={(e) => setCommentText(e.target.value)}
+		<section>
+			<article className="bg-white p-4 flex flex-col gap-4 rounded-md">
+				<div className="flex items-center gap-3">
+					<Image
+						src={user.image.png}
+						alt="icon profile"
+						width={25}
+						height={25}
 					/>
-					<Button
-						className="bg-clModerateblue text-white px-6 uppercase mt-2"
-						onClick={() => {
-							dispatch({
-								type: 'editComment',
-								payload: { id, comment: commentText },
-							});
-							setActiveEdit(false);
-						}}
-					>
-						update
-					</Button>
+					<p className="text-clDarkblue font-bold">{user.username}</p>
+					{user.username === currentUser.username && (
+						<span className="bg-clModerateblue text-clLightgray font-semibold px-1">
+							you
+						</span>
+					)}
+					<p className="text-clGrayBlue">{createdAt}</p>
 				</div>
-			) : (
-				<p className="text-clGrayBlue">{content}</p>
-			)}
+				{activeEdit ? (
+					<div>
+						<Textarea
+							placeholder="Add a comment..."
+							className="border w-full min-h-[80px] "
+							value={commentText}
+							onChange={(e) => setCommentText(e.target.value)}
+						/>
+						<Button
+							className="bg-clModerateblue text-white px-6 uppercase mt-2"
+							onClick={() => {
+								dispatch({
+									type: 'editComment',
+									payload: { id, comment: commentText },
+								});
+								setActiveEdit(false);
+							}}
+						>
+							update
+						</Button>
+					</div>
+				) : (
+					<p className="text-clGrayBlue">{content}</p>
+				)}
 
-			<div className="flex justify-between">
-				<LikesButtons id={id} score={score} />
-				{user.username === currentUser.username ? (
-					<div className="flex items-center gap-3">
-						<DeleteDialog id={id} />
+				<div className="flex justify-between">
+					<CommentLikesButtons id={id} score={score} />
+					{user.username === currentUser.username ? (
+						<div className="flex items-center gap-3">
+							<DeleteDialog id={id} />
+							<button
+								className="flex items-center text-clModerateblue font-semibold gap-1
+                 text-sm"
+								onClick={() => setActiveEdit(!activeEdit)}
+							>
+								<Image
+									src={editIcon}
+									alt="icon profile"
+									width={12}
+									height={12}
+								/>
+								<span>Edit</span>
+							</button>
+						</div>
+					) : (
 						<button
 							className="flex items-center text-clModerateblue font-semibold gap-1
                  text-sm"
-							onClick={() => setActiveEdit(!activeEdit)}
+							onClick={() => setActiveReply(!activeReply)}
 						>
 							<Image
-								src={editIcon}
+								src={arrowIcon}
 								alt="icon profile"
 								width={12}
 								height={12}
 							/>
-							<span>Edit</span>
+							<span>Reply</span>
 						</button>
-					</div>
-				) : (
-					<button
-						className="flex items-center text-clModerateblue font-semibold gap-1
-                 text-sm"
-					>
-						<Image
-							src={arrowIcon}
-							alt="icon profile"
-							width={12}
-							height={12}
-						/>
-						<span>Reply</span>
-					</button>
-				)}
-			</div>
-		</article>
+					)}
+				</div>
+			</article>
+			{activeReply && (
+				<AddReply
+					idComment={id}
+					setActiveReply={setActiveReply}
+					user={comment.user.username}
+				/>
+			)}
+
+			{replies && <RepliesList replies={replies} idComment={id} />}
+		</section>
 	);
 }

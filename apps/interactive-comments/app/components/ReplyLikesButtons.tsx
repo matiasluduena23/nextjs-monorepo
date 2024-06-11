@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
-import Image from 'next/image';
 import { useCommentDispatch } from '@/lib/CommentContext';
+import React, { useState } from 'react';
 import minusIcon from '@/public/icon-minus.svg';
 import plusIcon from '@/public/icon-plus.svg';
+import Image from 'next/image';
 
-export default function LikesButtons({
-	id,
+export default function ReplyLikesButtons({
+	idComment,
+	idReply,
 	score,
 }: {
-	id: number;
+	idComment: number;
+	idReply: number;
 	score: number;
 }) {
 	const dispatch = useCommentDispatch();
@@ -16,15 +18,22 @@ export default function LikesButtons({
 
 	const handleClickPlus = () => {
 		if (like === 2) return;
-		dispatch({ type: 'plusComment', payload: { id } });
+		dispatch({
+			type: 'likeReply',
+			payload: { idComment: idComment, idReply: idReply },
+		});
 		setLike(like + 1);
 	};
 
 	const handleClickMinus = () => {
 		if (like === 0) return;
-		dispatch({ type: 'minusComment', payload: { id } });
+		dispatch({
+			type: 'unlikeReply',
+			payload: { idComment: idComment, idReply: idReply },
+		});
 		setLike(like - 1);
 	};
+
 	return (
 		<div className="flex items-center  bg-clLightgray rounded-md ">
 			<button className="py-2 px-3 " onClick={handleClickPlus}>
