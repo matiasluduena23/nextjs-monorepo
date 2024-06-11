@@ -1,4 +1,4 @@
-import React, { use, useState } from 'react';
+import React, { useState } from 'react';
 import {
 	Dialog,
 	DialogContent,
@@ -13,9 +13,30 @@ import { Button } from '@/components/ui/button';
 import { useCommentDispatch } from '@/lib/CommentContext';
 import deleteIcon from '@/public/icon-delete.svg';
 import Image from 'next/image';
-export default function DeleteDialog({ id }: { id: number }) {
+export default function DeleteDialog({
+	id,
+	idReply,
+}: {
+	id: number;
+	idReply?: number;
+}) {
 	const dispatch = useCommentDispatch();
 	const [open, setOpen] = useState(false);
+
+	const handleClick = () => {
+		if (idReply) {
+			dispatch({
+				type: 'deleteReply',
+				payload: { idComment: id, idReply: idReply },
+			});
+		} else {
+			dispatch({
+				type: 'deleteComment',
+				payload: { id },
+			});
+		}
+		setOpen(false);
+	};
 
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
@@ -52,12 +73,7 @@ export default function DeleteDialog({ id }: { id: number }) {
 					<Button
 						variant={'destructive'}
 						className="uppercase w-[50%]"
-						onClick={() =>
-							dispatch({
-								type: 'deleteComment',
-								payload: { id },
-							})
-						}
+						onClick={handleClick}
 					>
 						yes delete
 					</Button>

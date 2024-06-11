@@ -1,10 +1,12 @@
-import { useCommentDispatch } from '@/lib/CommentContext';
+import { useComment, useCommentDispatch } from '@/lib/CommentContext';
 import { Reply } from '@/lib/definitions';
 import React, { useState } from 'react';
 import Image from 'next/image';
 import arrowIcon from '@/public/icon-reply.svg';
+import editIcon from '@/public/icon-edit.svg';
 
 import ReplyLikesButtons from './ReplyLikesButtons';
+import DeleteDialog from './DeleteDialog';
 
 export default function ReplyItem({
 	reply,
@@ -13,8 +15,10 @@ export default function ReplyItem({
 	reply: Reply;
 	idComment: number;
 }) {
+	const [activeEdit, setActiveEdit] = useState(false);
 	const { id, content, createdAt, score, user } = reply;
 	const dispatch = useCommentDispatch();
+	const { currentUser } = useComment();
 
 	return (
 		<article className="bg-gray-400  p-4 flex flex-col gap-4 rounded-md">
@@ -37,18 +41,37 @@ export default function ReplyItem({
 					idReply={id}
 					score={score}
 				/>
-				<button
-					className="flex items-center text-clModerateblue font-semibold gap-1
+				{user.username === currentUser.username ? (
+					<div className="flex items-center gap-3">
+						<DeleteDialog id={idComment} idReply={id} />
+						<button
+							className="flex items-center text-clModerateblue font-semibold gap-1
                  text-sm"
-				>
-					<Image
-						src={arrowIcon}
-						alt="icon profile"
-						width={12}
-						height={12}
-					/>
-					<span>Reply</span>
-				</button>
+							onClick={() => setActiveEdit(!activeEdit)}
+						>
+							<Image
+								src={editIcon}
+								alt="icon profile"
+								width={12}
+								height={12}
+							/>
+							<span>Edit</span>
+						</button>
+					</div>
+				) : (
+					<button
+						className="flex items-center text-clModerateblue font-semibold gap-1
+                 text-sm"
+					>
+						<Image
+							src={arrowIcon}
+							alt="icon profile"
+							width={12}
+							height={12}
+						/>
+						<span>Reply</span>
+					</button>
+				)}
 			</div>
 		</article>
 	);
