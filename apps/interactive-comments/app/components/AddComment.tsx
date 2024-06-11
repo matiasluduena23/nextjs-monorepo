@@ -28,7 +28,7 @@ export default function AddComment() {
 	};
 
 	return (
-		<article className="bg-white p-4 rounded-md">
+		<article className="bg-white p-4 rounded-md sm:max-w-[600px] mx-auto w-full">
 			<Textarea
 				placeholder="Add a comment..."
 				className="border w-full min-h-[80px] "

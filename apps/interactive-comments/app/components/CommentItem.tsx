@@ -51,6 +51,7 @@ export default function CommentItem({ comment }: { comment: Comment }) {
 						<Button
 							className="bg-clModerateblue text-white px-6 uppercase mt-2 hover:opacity-70 w-fit"
 							onClick={() => {
+								if (!commentText) return;
 								dispatch({
 									type: 'editComment',
 									payload: { id, comment: commentText },

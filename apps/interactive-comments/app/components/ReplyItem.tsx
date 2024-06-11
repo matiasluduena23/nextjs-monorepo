@@ -47,6 +47,7 @@ export default function ReplyItem({
 					<Button
 						className="bg-clModerateblue text-white px-6 uppercase mt-2 hover:opacity-70 w-fit"
 						onClick={() => {
+							if (!commentText) return;
 							dispatch({
 								type: 'editReply',
 								payload: {
