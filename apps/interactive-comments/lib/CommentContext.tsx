@@ -53,7 +53,11 @@ type CommentReducer =
 	| { type: 'addReply'; payload: { idComment: number; reply: Reply } }
 	| { type: 'likeReply'; payload: { idComment: number; idReply: number } }
 	| { type: 'unlikeReply'; payload: { idComment: number; idReply: number } }
-	| { type: 'deleteReply'; payload: { idComment: number; idReply: number } };
+	| { type: 'deleteReply'; payload: { idComment: number; idReply: number } }
+	| {
+			type: 'editReply';
+			payload: { idComment: number; idReply: number; comment: string };
+	  };
 
 function commentReducer(
 	state: UserComment,
@@ -212,6 +216,37 @@ function commentReducer(
 										(reply) =>
 											reply.id !== action.payload.idReply
 									),
+								],
+							};
+						} else {
+							return item;
+						}
+					}),
+				],
+			};
+		}
+
+		case 'editReply': {
+			return {
+				...state,
+				comments: [
+					...state.comments.map((item) => {
+						if (item.id === action.payload.idComment) {
+							return {
+								...item,
+								replies: [
+									...item.replies.map((reply) => {
+										if (
+											reply.id === action.payload.idReply
+										) {
+											return {
+												...reply,
+												content: action.payload.comment,
+											};
+										} else {
+											return reply;
+										}
+									}),
 								],
 							};
 						} else {

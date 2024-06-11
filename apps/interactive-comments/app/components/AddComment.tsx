@@ -15,7 +15,7 @@ export default function AddComment() {
 	const handleClick = () => {
 		if (!commentText) return;
 		const newComment: Comment = {
-			id: 5,
+			id: Number(new Date()),
 			content: commentText,
 			createdAt: 'recently',
 			score: 0,

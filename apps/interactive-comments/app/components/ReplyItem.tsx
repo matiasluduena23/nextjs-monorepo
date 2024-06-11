@@ -7,6 +7,8 @@ import editIcon from '@/public/icon-edit.svg';
 
 import ReplyLikesButtons from './ReplyLikesButtons';
 import DeleteDialog from './DeleteDialog';
+import { Textarea } from '../../../e-commerce/components/ui/textarea';
+import { Button } from '../../../e-commerce/components/ui/button';
 
 export default function ReplyItem({
 	reply,
@@ -19,6 +21,7 @@ export default function ReplyItem({
 	const { id, content, createdAt, score, user } = reply;
 	const dispatch = useCommentDispatch();
 	const { currentUser } = useComment();
+	const [commentText, setCommentText] = useState(content);
 
 	return (
 		<article className="bg-gray-400  p-4 flex flex-col gap-4 rounded-md">
@@ -33,7 +36,34 @@ export default function ReplyItem({
 				<p className="text-clGrayBlue">{createdAt}</p>
 			</div>
 
-			<p className="text-clGrayBlue">{content}</p>
+			{activeEdit ? (
+				<div>
+					<Textarea
+						placeholder="Add a comment..."
+						className="border w-full min-h-[80px] "
+						value={commentText}
+						onChange={(e) => setCommentText(e.target.value)}
+					/>
+					<Button
+						className="bg-clModerateblue text-white px-6 uppercase mt-2"
+						onClick={() => {
+							dispatch({
+								type: 'editReply',
+								payload: {
+									idComment: idComment,
+									idReply: id,
+									comment: commentText,
+								},
+							});
+							setActiveEdit(false);
+						}}
+					>
+						update
+					</Button>
+				</div>
+			) : (
+				<p className="text-clGrayBlue">{content}</p>
+			)}
 
 			<div className="flex justify-between">
 				<ReplyLikesButtons

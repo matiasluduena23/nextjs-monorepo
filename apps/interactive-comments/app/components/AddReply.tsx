@@ -21,7 +21,7 @@ export default function AddReply({
 	const handleClick = () => {
 		if (!replyText) return;
 		const newReply: Reply = {
-			id: 5,
+			id: Number(new Date()),
 			content: replyText,
 			createdAt: 'recently',
 			score: 0,
